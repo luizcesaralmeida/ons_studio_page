@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <title>ONS Studio – Documentação de Funcionalidades</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta
-    name="description"
-    content="Documentação de apresentação das funcionalidades do ONS Studio – ferramenta de prototipação visual focada em React Native."
-  />
+  <meta name="description"
+    content="Documentação de apresentação das funcionalidades do ONS Studio – ferramenta de prototipação visual focada em React Native." />
   <style>
     :root {
       --bg: #0b1020;
@@ -61,11 +60,9 @@
       margin-bottom: 32px;
       padding: 24px 20px;
       border-radius: 24px;
-      background: linear-gradient(
-          135deg,
+      background: linear-gradient(135deg,
           rgba(98, 70, 184, 0.9),
-          rgba(16, 185, 129, 0.2)
-        ),
+          rgba(16, 185, 129, 0.2)),
         radial-gradient(circle at top right, rgba(244, 180, 26, 0.18), transparent);
       box-shadow: var(--shadow-soft);
       position: relative;
@@ -76,11 +73,9 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image: radial-gradient(
-          circle at 10% 10%,
+      background-image: radial-gradient(circle at 10% 10%,
           rgba(255, 255, 255, 0.12),
-          transparent 55%
-        ),
+          transparent 55%),
         radial-gradient(circle at 90% 80%, rgba(0, 0, 0, 0.4), transparent 55%);
       mix-blend-mode: soft-light;
       opacity: 0.5;
@@ -159,13 +154,12 @@
       position: relative;
       padding: 20px 18px;
       border-radius: 20px;
-      background: linear-gradient(
-        160deg,
-        rgba(24, 31, 54, 0.95),
-        rgba(12, 19, 40, 0.98)
-      );
+      background: linear-gradient(160deg,
+          rgba(24, 31, 54, 0.95),
+          rgba(12, 19, 40, 0.98));
       border: 1px solid var(--border-soft);
       box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6);
+      max-height: fit-content;
     }
 
     .sidebar h2 {
@@ -273,7 +267,7 @@
       color: var(--text-soft);
     }
 
-    .section-list li + li {
+    .section-list li+li {
       margin-top: 3px;
     }
 
@@ -331,8 +325,46 @@
     .btn:hover {
       border-color: #e5e7eb;
     }
+
+    /* Tela cheia (overlay) */
+    .gif-fullscreen-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      cursor: zoom-out;
+    }
+
+    .gif-fullscreen-img {
+      max-width: 95%;
+      max-height: 95%;
+      border-radius: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.85);
+    }
+
+    /* Botão de tela cheia */
+    .btn-fullscreen {
+      padding: 8px 14px;
+      background: linear-gradient(135deg, var(--primary), #3b82f6);
+      border: none;
+      color: white;
+      font-size: 0.85rem;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      transition: 0.2s ease;
+    }
+
+    .btn-fullscreen:hover {
+      transform: scale(1.05);
+    }
   </style>
 </head>
+
 <body>
   <div class="page">
     <header>
@@ -358,8 +390,83 @@
     <main>
       <!-- Coluna principal: seções / etapas -->
       <section class="sections" aria-label="Etapas da ferramenta">
-        <!-- 1. Definição do Escopo -->
+
+        <!-- 10. Demonstração Visual do ONS Studio -->
         <article class="section-card" data-step="01">
+          <div class="section-tagline">Visual • Interativo</div>
+          <h2>Demonstração Visual do ONS Studio</h2>
+
+          <p>
+            Abaixo está uma prévia animada demonstrando a usabilidade do ONS Studio em ação.
+            O GIF exibe o processo de montagem visual, interação com a grade 3×3, adição de
+            componentes e ajustes visuais no ambiente de criação.
+          </p>
+
+          <div style="margin: 12px 0; text-align: center;">
+            <img src="assets/demostracao_ons_studio.gif" alt="Demonstração do ONS Studio em funcionamento"
+              class="demostracao_ons_studio-gif" style="
+      max-width: 100%;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 10px 32px rgba(0,0,0,0.55);
+      cursor: zoom-in;
+    " onclick="openFullscreenGif('gif-fullscreen')">
+
+            <div style="margin-top: 10px;">
+              <button class="btn-fullscreen" onclick="openFullscreenGif('gif-fullscreen')">Ver em Tela Cheia</button>
+            </div>
+          </div>
+
+          <ul class="section-list">
+            <li>Exibe a interação com o grid visual de 3×3.</li>
+            <li>Mostra a adição e remoção de componentes em tempo real.</li>
+            <li>Destaca a experiência de movimentar os componentes usando comandos direcionais.</li>
+            <li>Permite visualizar rapidamente o fluxo de criação de telas.</li>
+          </ul>
+
+          <p>
+            Para ver o GIF em resolução maior basta clicar no botão "Ver em tela cheia" ou clicar no próprio Gif.
+          </p>
+        </article>
+
+            <!-- 9. Geração Assistida por IA -->
+        <article class="section-card" data-step="02">
+          <div class="section-tagline">Experimental – IA integrada</div>
+          <h2>Geração Assistida por Inteligência Artificial</h2>
+
+          <p>
+            O ONS Studio conta com uma funcionalidade experimental que permite gerar componentes
+            e layouts automaticamente utilizando modelos de Inteligência Artificial. A IA entende
+            comandos em linguagem natural e constrói, organiza e posiciona os elementos na grade
+            visual de forma autônoma.
+          </p>
+          <div style="margin: 12px 0; text-align: center;">
+            <img src="assets/demostracao_ons_studio-1.gif" alt="Demonstração do ONS Studio em funcionamento"
+              class="demostracao_ons_studio-gif" style="max-width: 100%;border-radius: 16px;border: 1px solid rgba(255, 255, 255, 0.12);box-shadow: 0 10px 32px rgba(0,0,0,0.55);
+      cursor: zoom-in;
+          " onclick="openFullscreenGif('gif-fullscreen-1')">
+
+            <div style="margin-top: 10px;">
+              <button class="btn-fullscreen" onclick="openFullscreenGif('gif-fullscreen-1')">Ver em Tela Cheia</button>
+            </div>
+          </div>
+
+          <ul class="section-list">
+            <li>Interpretação automática de instruções como: “adicione um botão primário no slot 4”.</li>
+            <li>Construção de múltiplos componentes simultaneamente, com validação da grade 3×3.</li>
+            <li>Geração rápida de rascunhos de interface com poucos comandos.</li>
+            <li>Auxílio no fluxo de prototipação, acelerando ideias e experimentos.</li>
+            <li>Baseado em modelos OpenAI / Amazon Bedrock, conforme configuração do ambiente.</li>
+          </ul>
+
+          <p>
+            Essa funcionalidade está em fase experimental e pode apresentar limitações na resposta
+            aos comandos. Seu objetivo é atuar como um “copiloto de design”, reduzindo o tempo
+            necessário para montar telas e protótipos completos.
+          </p>
+        </article>
+        <!-- 1. Definição do Escopo -->
+        <article class="section-card" data-step="03">
           <div class="section-tagline">Escopo e visão</div>
           <h2>Definição do Escopo</h2>
           <p>
@@ -374,7 +481,7 @@
         </article>
 
         <!-- 2. Planejamento e Design da Experiência -->
-        <article class="section-card" data-step="02">
+        <article class="section-card" data-step="04">
           <div class="section-tagline">Experiência do usuário</div>
           <h2>Planejamento e Design da Experiência</h2>
           <p>
@@ -389,7 +496,7 @@
         </article>
 
         <!-- 3. Construção da Interface de Prototipação -->
-        <article class="section-card" data-step="03">
+        <article class="section-card" data-step="05">
           <div class="section-tagline">Montagem visual</div>
           <h2>Construção da Interface de Prototipação</h2>
           <p>
@@ -408,22 +515,19 @@
         </article>
 
         <!-- 4. Customização Visual e Funcional -->
-        <article class="section-card" data-step="04">
+        <article class="section-card" data-step="06">
           <div class="section-tagline">Personalização</div>
           <h2>Customização Visual e Funcional</h2>
           <p>
-            Implementação de recursos que permitem ao usuário personalizar os componentes
-            inseridos, como rótulos, cores, tamanhos e organização dos elementos.
+            Implementação de recursos que permitem ao usuário selecionar temas de sistemas previamente definidos e organização dos elementos.
           </p>
-          <ul class="section-list">
-            <li>Ajuste de cores, tamanhos, fontes, ícones e espaçamento.</li>
-            <li>Configuração de rótulos, placeholders e estados visuais.</li>
-            <li>Definição de ações e comportamento básico dos componentes.</li>
+          <ul class="section-list">            
+            <li>Ajustar o posicionamento dos componentes na área visualização e esse posicionamento será respeitado na exportação do código.</li>
           </ul>
         </article>
 
         <!-- 5. Geração de Componentes Reutilizáveis -->
-        <article class="section-card" data-step="05">
+        <article class="section-card" data-step="07">
           <div class="section-tagline">Código gerado</div>
           <h2>Geração de Componentes Reutilizáveis</h2>
           <p>
@@ -438,7 +542,7 @@
         </article>
 
         <!-- 6. Exportação e Integração -->
-        <article class="section-card" data-step="06">
+        <article class="section-card" data-step="08">
           <div class="section-tagline">Integração com projetos</div>
           <h2>Exportação e Integração</h2>
           <p>
@@ -447,13 +551,11 @@
           </p>
           <ul class="section-list">
             <li>Exportação direta para arquivos de componente.</li>
-            <li>Possibilidade de exportar estrutura de layout em JSON.</li>
-            <li>Integração com repositórios e pipelines existentes.</li>
           </ul>
         </article>
 
         <!-- 7. Validação e Testes com Usuários -->
-        <article class="section-card" data-step="07">
+        <article class="section-card" data-step="09">
           <div class="section-tagline">Qualidade e usabilidade</div>
           <h2>Validação e Testes com Usuários</h2>
           <p>
@@ -468,7 +570,7 @@
         </article>
 
         <!-- 8. Entrega e Apresentação Final -->
-        <article class="section-card" data-step="08">
+        <article class="section-card" data-step="10">
           <div class="section-tagline">Go-live</div>
           <h2>Entrega e Apresentação Final</h2>
           <p>
@@ -478,9 +580,9 @@
           <ul class="section-list">
             <li>Demonstração ao vivo da criação de uma tela completa.</li>
             <li>Guia rápido de uso e boas práticas de montagem.</li>
-            <li>Material de apoio para desenvolvimento e produto.</li>
           </ul>
         </article>
+    
       </section>
 
       <!-- Coluna lateral: benefícios -->
@@ -553,7 +655,7 @@
         </div>
 
         <p class="sidebar-note">
-          Em resumo, o ONS Studio centraliza todo o fluxo de criação visual de interfaces em um
+          Em resumo, o ONS Studio pode centraliza o fluxo de criação visual de interfaces em um
           só lugar: da ideia ao código funcionando, com foco em velocidade, consistência e reuso.
         </p>
       </aside>
@@ -565,11 +667,24 @@
         “motor de layout visual” para React Native, otimizando experimentação,
         prototipação e entrega de interfaces.
       </div>
-      <div class="footer-actions">
-        <span class="btn btn-primary">Pronto para publicar no GitHub Pages</span>
-        <span class="btn">Salvar como index.html</span>
-      </div>
     </footer>
   </div>
+  <div id="gif-fullscreen" class="gif-fullscreen-overlay" onclick="closeFullscreenGif('gif-fullscreen')">
+    <img src="assets/demostracao_ons_studio.gif" class="gif-fullscreen-img">
+  </div>
+  <div id="gif-fullscreen-1" class="gif-fullscreen-overlay" onclick="closeFullscreenGif('gif-fullscreen-1')">
+    <img src="assets/demostracao_ons_studio-1.gif" class="gif-fullscreen-img">
+  </div>
+  <script>
+    function openFullscreenGif(id) {
+      document.getElementById(id).style.display = 'flex';
+    }
+
+    function closeFullscreenGif(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+  </script>
+
 </body>
+
 </html>
