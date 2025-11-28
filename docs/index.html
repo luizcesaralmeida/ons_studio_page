@@ -622,6 +622,62 @@
           </ul>
         </article>
 
+        <!-- 11. Dependências para Desenvolvimento -->
+        <article class="section-card" data-step="12">
+          <div class="section-tagline">Setup • Ambiente • Dev</div>
+          <h2>Dependências Necessárias para Desenvolver e Manter o ONS Studio</h2>
+
+          <p>
+            Para clonar o repositório do ONS Studio e atuar na manutenção do projeto, é
+            necessário configurar um ambiente de desenvolvimento compatível com React Native
+            para Windows, além de algumas ferramentas de apoio utilizadas pelo projeto.
+          </p>
+
+          <ul class="section-list">
+            <li><strong>Node.js (LTS)</strong> – Recomendado: versão 18.x ou 20.x.</li>
+            <li><strong>NPM ou Yarn</strong> – Gerenciador de pacotes JavaScript.</li>
+            <li><strong>Git</strong> – Para clonar e versionar o repositório.</li>
+            <li><strong>Visual Studio 2022</strong> com workloads:</li>
+            <ul class="section-list">
+              <li>– Desktop development with C++</li>
+              <li>– Universal Windows Platform (UWP) workload (se aplicável)</li>
+              <li>– MSVC v143 ou superior</li>
+              <li>– Windows 10/11 SDK (mínimo: 10.0.19041 ou superior)</li>
+            </ul>
+            <li><strong>React Native Windows</strong> – Instalado via <code>npx react-native-windows-init</code>.</li>
+            <li><strong>Windows Build Tools</strong> – Necessários para compilar binários nativos.</li>
+            <li><strong>Python 3.x</strong> – Usado por ferramentas internas do RNW.</li>            
+            <li><strong>Editor de Código: VS Code</strong> – Recomendado para edição do JavaScript/TypeScript.</li>
+          </ul>
+
+          <p>
+            Após instalar as dependências obrigatórias, basta clonar o repositório e instalar
+            as bibliotecas necessárias:
+          </p>
+
+          <pre style="
+    background: rgba(255,255,255,0.06);
+    padding: 12px;
+    border-radius: 12px;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    border: 1px solid rgba(255,255,255,0.12);
+  ">
+git clone link do repo
+cd ons_studio
+npm install
+npx react-native-windows-init --overwrite
+npm run windows
+  </pre>
+
+          <p>
+            Em caso de erros de build, certifique-se de que o Visual Studio esteja atualizado e
+            que os componentes necessários estejam instalados. Os logs de compilação ajudarão a
+            identificar dependências faltantes ou conflitos nativos.
+          </p>
+        </article>
+
+
       </section>
 
       <!-- Coluna lateral: benefícios -->
