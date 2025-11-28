@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>ONS Studio – Documentação de Funcionalidades</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Documentação de apresentação das funcionalidades do ONS Studio – ferramenta de prototipação visual focada em React Native."
+  />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-alt: #12182b;
+      --card: #181f36;
+      --primary: #6246b8;
+      --primary-soft: rgba(98, 70, 184, 0.18);
+      --accent: #f4b41a;
+      --text: #f9fafb;
+      --text-soft: #c5c8d6;
+      --border-soft: rgba(255, 255, 255, 0.06);
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #1c2750 0, #050712 55%);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 16px 64px;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 32px;
+      padding: 24px 20px;
+      border-radius: 24px;
+      background: linear-gradient(
+          135deg,
+          rgba(98, 70, 184, 0.9),
+          rgba(16, 185, 129, 0.2)
+        ),
+        radial-gradient(circle at top right, rgba(244, 180, 26, 0.18), transparent);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(
+          circle at 10% 10%,
+          rgba(255, 255, 255, 0.12),
+          transparent 55%
+        ),
+        radial-gradient(circle at 90% 80%, rgba(0, 0, 0, 0.4), transparent 55%);
+      mix-blend-mode: soft-light;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(10, 13, 30, 0.38);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #e5e7eb;
+      border: 1px solid rgba(249, 250, 251, 0.12);
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+
+    h1 {
+      font-size: clamp(1.9rem, 3vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      max-width: 650px;
+      color: var(--text-soft);
+      font-size: 0.98rem;
+    }
+
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+      font-size: 0.84rem;
+      color: #e5e7eb;
+    }
+
+    .header-pill {
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(10, 13, 30, 0.4);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 1.4fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 880px) {
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Sidebar (benefícios) */
+    .sidebar {
+      position: relative;
+      padding: 20px 18px;
+      border-radius: 20px;
+      background: linear-gradient(
+        160deg,
+        rgba(24, 31, 54, 0.95),
+        rgba(12, 19, 40, 0.98)
+      );
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .sidebar h2 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .sidebar-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-soft);
+      margin-bottom: 16px;
+    }
+
+    .benefit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .benefit-item {
+      padding: 10px 10px;
+      border-radius: 14px;
+      background: rgba(11, 16, 36, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      font-size: 0.86rem;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .benefit-item span {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .benefit-bullet {
+      margin-top: 2px;
+      font-size: 0.7rem;
+      opacity: 0.7;
+    }
+
+    .sidebar-note {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      border-top: 1px dashed rgba(148, 163, 184, 0.4);
+      padding-top: 10px;
+      margin-top: 6px;
+    }
+
+    /* Timeline / Seções principais */
+    .sections {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .section-card {
+      position: relative;
+      padding: 16px 16px 18px;
+      border-radius: var(--radius-lg);
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+
+    .section-card::before {
+      content: attr(data-step);
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      font-size: 0.74rem;
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      background: var(--primary-soft);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: #e5e7eb;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .section-card h2 {
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .section-tagline {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .section-card p {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+
+    .section-list {
+      margin: 4px 0 4px 16px;
+      font-size: 0.89rem;
+      color: var(--text-soft);
+    }
+
+    .section-list li + li {
+      margin-top: 3px;
+    }
+
+    .grid-meta {
+      margin-top: 4px;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      opacity: 0.9;
+    }
+
+    /* Footer / conclusão */
+    footer {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(148, 163, 184, 0.3);
+      font-size: 0.88rem;
+      color: var(--text-soft);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .footer-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      font-size: 0.8rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #3b82f6);
+      border-color: transparent;
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.05);
+    }
+
+    .btn:hover {
+      border-color: #e5e7eb;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="header-content">
+        <div class="badge">
+          <div class="badge-dot"></div>
+          <span>ONS Studio • Prototipação Visual</span>
+        </div>
+        <h1>Documentação de Funcionalidades do ONS Studio</h1>
+        <p class="subtitle">
+          O ONS Studio é uma ferramenta visual de prototipação e geração de interfaces
+          focada em React Native, permitindo criar telas, componentes e layouts em poucos
+          minutos, com exportação direta para código reutilizável.
+        </p>
+        <div class="header-meta">
+          <div class="header-pill">Foco: React Native / Windows</div>
+          <div class="header-pill">Público: Design, Produto, Dev</div>
+          <div class="header-pill">Uso: Prototipação, MVPs, Layouts</div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Coluna principal: seções / etapas -->
+      <section class="sections" aria-label="Etapas da ferramenta">
+        <!-- 1. Definição do Escopo -->
+        <article class="section-card" data-step="01">
+          <div class="section-tagline">Escopo e visão</div>
+          <h2>Definição do Escopo</h2>
+          <p>
+            Mapeamento dos objetivos da ferramenta, do público-alvo e dos tipos de
+            componentes que serão disponibilizados para prototipação visual no ONS Studio.
+          </p>
+          <ul class="section-list">
+            <li>Objetivo: criar um ambiente visual para montagem de telas e componentes.</li>
+            <li>Público-alvo: designers, desenvolvedores e equipes de produto.</li>
+            <li>Componentes: botões, inputs, cards, listas, containers, formulários, etc.</li>
+          </ul>
+        </article>
+
+        <!-- 2. Planejamento e Design da Experiência -->
+        <article class="section-card" data-step="02">
+          <div class="section-tagline">Experiência do usuário</div>
+          <h2>Planejamento e Design da Experiência</h2>
+          <p>
+            Criação do fluxo de uso da ferramenta com foco em uma interface simples e
+            intuitiva para montagem visual de telas e componentes, minimizando curva de aprendizado.
+          </p>
+          <ul class="section-list">
+            <li>Interação baseada em arrastar e soltar (drag and drop).</li>
+            <li>Visualização instantânea das mudanças na tela.</li>
+            <li>Fluxo: Escolher → Montar → Personalizar → Exportar.</li>
+          </ul>
+        </article>
+
+        <!-- 3. Construção da Interface de Prototipação -->
+        <article class="section-card" data-step="03">
+          <div class="section-tagline">Montagem visual</div>
+          <h2>Construção da Interface de Prototipação</h2>
+          <p>
+            Desenvolvimento da área principal onde os usuários podem montar suas interfaces,
+            simulando a construção de telas reais em um grid visual.
+          </p>
+          <p class="grid-meta">
+            A interface utiliza uma grade lógica (ex.: 3x3) que organiza componentes por slots,
+            facilitando visualização e estruturação do layout.
+          </p>
+          <ul class="section-list">
+            <li>Área de trabalho com slots para posicionamento de componentes.</li>
+            <li>Suporte a múltiplos tipos de componentes por tela.</li>
+            <li>Feedback visual ao posicionar, mover ou remover elementos.</li>
+          </ul>
+        </article>
+
+        <!-- 4. Customização Visual e Funcional -->
+        <article class="section-card" data-step="04">
+          <div class="section-tagline">Personalização</div>
+          <h2>Customização Visual e Funcional</h2>
+          <p>
+            Implementação de recursos que permitem ao usuário personalizar os componentes
+            inseridos, como rótulos, cores, tamanhos e organização dos elementos.
+          </p>
+          <ul class="section-list">
+            <li>Ajuste de cores, tamanhos, fontes, ícones e espaçamento.</li>
+            <li>Configuração de rótulos, placeholders e estados visuais.</li>
+            <li>Definição de ações e comportamento básico dos componentes.</li>
+          </ul>
+        </article>
+
+        <!-- 5. Geração de Componentes Reutilizáveis -->
+        <article class="section-card" data-step="05">
+          <div class="section-tagline">Código gerado</div>
+          <h2>Geração de Componentes Reutilizáveis</h2>
+          <p>
+            Conversão da interface criada em componentes reutilizáveis que podem ser integrados
+            diretamente em aplicações React Native.
+          </p>
+          <ul class="section-list">
+            <li>Exportação de componentes em formato React Native (ex.: TSX).</li>
+            <li>Estrutura pensada para reuso em múltiplos projetos.</li>
+            <li>Padronização a partir de uma base comum de design system.</li>
+          </ul>
+        </article>
+
+        <!-- 6. Exportação e Integração -->
+        <article class="section-card" data-step="06">
+          <div class="section-tagline">Integração com projetos</div>
+          <h2>Exportação e Integração</h2>
+          <p>
+            Disponibilização de opções para exportar os componentes gerados, facilitando o uso
+            em projetos reais de forma rápida e padronizada.
+          </p>
+          <ul class="section-list">
+            <li>Exportação direta para arquivos de componente.</li>
+            <li>Possibilidade de exportar estrutura de layout em JSON.</li>
+            <li>Integração com repositórios e pipelines existentes.</li>
+          </ul>
+        </article>
+
+        <!-- 7. Validação e Testes com Usuários -->
+        <article class="section-card" data-step="07">
+          <div class="section-tagline">Qualidade e usabilidade</div>
+          <h2>Validação e Testes com Usuários</h2>
+          <p>
+            Realização de testes com usuários-alvo para garantir que a ferramenta atenda às
+            necessidades de usabilidade, eficiência e resultado esperado.
+          </p>
+          <ul class="section-list">
+            <li>Testes de criação de telas completas em fluxo real.</li>
+            <li>Avaliação de clareza da interface e dos controles.</li>
+            <li>Coleta de feedback para evolução contínua da ferramenta.</li>
+          </ul>
+        </article>
+
+        <!-- 8. Entrega e Apresentação Final -->
+        <article class="section-card" data-step="08">
+          <div class="section-tagline">Go-live</div>
+          <h2>Entrega e Apresentação Final</h2>
+          <p>
+            Apresentação da ferramenta funcionando, com exemplos práticos e documentação básica
+            de uso para desenvolvedores e equipes de produto.
+          </p>
+          <ul class="section-list">
+            <li>Demonstração ao vivo da criação de uma tela completa.</li>
+            <li>Guia rápido de uso e boas práticas de montagem.</li>
+            <li>Material de apoio para desenvolvimento e produto.</li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- Coluna lateral: benefícios -->
+      <aside class="sidebar" aria-label="Benefícios">
+        <h2>Benefícios principais</h2>
+        <p class="sidebar-subtitle">
+          O ONS Studio entrega ganhos diretos de velocidade, padronização e autonomia
+          para times de produto, design e desenvolvimento.
+        </p>
+
+        <div class="benefit-list">
+          <div class="benefit-item">
+            <div class="benefit-bullet">●</div>
+            <div>
+              <span>1. Agilidade no desenvolvimento de interfaces</span><br />
+              Montagem rápida de protótipos visuais, sem precisar escrever código
+              manualmente para cada componente. Ideal para testes de layout, usabilidade
+              e validação com stakeholders.
+            </div>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-bullet">●</div>
+            <div>
+              <span>2. Visualização imediata</span><br />
+              Equipes conseguem ver em tempo real como os componentes interagem,
+              facilitando decisões de design, identificação de inconsistências e
+              entendimento do fluxo de navegação.
+            </div>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-bullet">●</div>
+            <div>
+              <span>3. Facilidade para usuários não técnicos</span><br />
+              Designers e profissionais de produto podem criar protótipos funcionais
+              apenas com o uso do mouse, reduzindo a dependência da equipe de
+              desenvolvimento.
+            </div>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-bullet">●</div>
+            <div>
+              <span>4. Reutilização de componentes</span><br />
+              Baseado em uma biblioteca de componentes reutilizáveis (botões, inputs,
+              cards etc.), favorecendo padronização visual, reuso de código e economia
+              de tempo.
+            </div>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-bullet">●</div>
+            <div>
+              <span>5. Modularidade</span><br />
+              Componentes individuais funcionam como blocos combináveis, incentivando
+              soluções modulares e escaláveis para interface.
+            </div>
+          </div>
+
+          <div class="benefit-item">
+            <div class="benefit-bullet">●</div>
+            <div>
+              <span>6. Rapidez na prototipação de MVPs</span><br />
+              Facilita a criação de Mínimos Produtos Viáveis (MVPs), permitindo gerar
+              rapidamente interfaces que podem ser testadas com usuários ou validadas
+              com o time.
+            </div>
+          </div>
+        </div>
+
+        <p class="sidebar-note">
+          Em resumo, o ONS Studio centraliza todo o fluxo de criação visual de interfaces em um
+          só lugar: da ideia ao código funcionando, com foco em velocidade, consistência e reuso.
+        </p>
+      </aside>
+    </main>
+
+    <footer>
+      <div>
+        <strong>Conclusão:</strong> o ONS Studio atua como um
+        “motor de layout visual” para React Native, otimizando experimentação,
+        prototipação e entrega de interfaces.
+      </div>
+      <div class="footer-actions">
+        <span class="btn btn-primary">Pronto para publicar no GitHub Pages</span>
+        <span class="btn">Salvar como index.html</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
